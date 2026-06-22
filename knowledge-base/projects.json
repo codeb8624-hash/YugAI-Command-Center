@@ -20,7 +20,7 @@
         "Image sharing and download features"
       ],
       "links": {
-        "github": "https://github.com/yugsathavara/chitra-ai",
+        "github": "https://github.com/codeb8624-hash/image-v1.0",
         "demo": null
       },
       "images": ["chitra-ai-1.png", "chitra-ai-2.png"]
@@ -41,7 +41,7 @@
         "Sales and purchase reporting dashboards"
       ],
       "links": {
-        "github": "https://github.com/yugsathavara/hariom-erp",
+        "github": "https://github.com/codeb8624-hash/hariom-machinery-erp",
         "demo": null
       },
       "images": ["hariom-erp-1.png", "hariom-erp-2.png"]
@@ -62,7 +62,7 @@
         "Secure session-based authentication"
       ],
       "links": {
-        "github": "https://github.com/yugsathavara/school-mgmt",
+        "github": "https://github.com/codeb8624-hash/SVM-school-management-system",
         "demo": null
       },
       "images": ["school-mgmt-1.png", "school-mgmt-2.png"]

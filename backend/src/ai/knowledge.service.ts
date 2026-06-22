@@ -56,7 +56,7 @@ export function getAchievementsData(): Record<string, unknown> {
   return loadKnowledgeBase().achievements;
 }
 
-export function buildKnowledgeContext(query: string): string {
+export function buildKnowledgeContext(_query?: string): string {
   const kb = loadKnowledgeBase();
 
   const resume = kb.resume;
@@ -65,106 +65,71 @@ export function buildKnowledgeContext(query: string): string {
   const education = kb.education;
   const achievements = kb.achievements;
 
-  const q = query.toLowerCase();
-
   let context = "";
 
   context += `[PERSONAL INFO]\nName: ${(resume.personalInfo as Record<string, string>)?.name || "Yug Sathavara"}\n`;
   context += `Title: ${(resume.personalInfo as Record<string, string>)?.title || ""}\n`;
   context += `Summary: ${(resume.personalInfo as Record<string, string>)?.summary || ""}\n\n`;
 
-  if (q.includes("skill") || q.includes("technolog") || q.includes("know")) {
-    const cats = (skills as Record<string, unknown>)?.categories as Array<Record<string, unknown>>;
-    if (cats) {
-      context += `[SKILLS]\n`;
-      for (const cat of cats) {
-        context += `\n${cat.name}:\n`;
-        const skillList = cat.skills as Array<Record<string, unknown>>;
-        for (const s of skillList) {
-          context += `- ${s.name} (Level: ${s.level}/100, Experience: ${s.experience})\n`;
-        }
+  const cats = (skills as Record<string, unknown>)?.categories as Array<Record<string, unknown>>;
+  if (cats) {
+    context += `[SKILLS]\n`;
+    for (const cat of cats) {
+      context += `\n${cat.name}:\n`;
+      const skillList = cat.skills as Array<Record<string, unknown>>;
+      for (const s of skillList) {
+        context += `- ${s.name} (Level: ${s.level}/100, Experience: ${s.experience})\n`;
       }
     }
     context += "\n";
   }
 
-  if (q.includes("project") || q.includes("chitra") || q.includes("erp") || q.includes("school") || q.includes("built") || q.includes("architecture")) {
-    const projList = (projects as Record<string, unknown>)?.projects as Array<Record<string, unknown>>;
-    if (projList) {
-      context += `[PROJECTS]\n`;
-      for (const p of projList) {
-        context += `\n${p.name} (${p.status} — ${p.year})\n`;
-        context += `Tagline: ${p.tagline}\n`;
-        context += `Tech: ${(p.techStack as string[]).join(", ")}\n`;
-        context += `Description: ${p.description}\n`;
-        context += `Highlights:\n`;
-        for (const h of p.highlights as string[]) {
-          context += `- ${h}\n`;
-        }
+  const projList = (projects as Record<string, unknown>)?.projects as Array<Record<string, unknown>>;
+  if (projList) {
+    context += `[PROJECTS]\n`;
+    for (const p of projList) {
+      context += `\n${p.name} (${p.status} — ${p.year})\n`;
+      context += `Tagline: ${p.tagline}\n`;
+      context += `Tech: ${(p.techStack as string[]).join(", ")}\n`;
+      context += `Description: ${p.description}\n`;
+      context += `Highlights:\n`;
+      for (const h of p.highlights as string[]) {
+        context += `- ${h}\n`;
       }
     }
     context += "\n";
   }
 
-  if (q.includes("education") || q.includes("college") || q.includes("gcet") || q.includes("learn")) {
-    const eduList = education.education as Array<Record<string, unknown>> | undefined;
-    if (eduList) {
-      context += `[EDUCATION]\n`;
-      for (const e of eduList) {
-        context += `${e.degree} — ${e.institution} (${(e.period as Record<string, string>)?.start}–${(e.period as Record<string, string>)?.end || "Present"})\n`;
-      }
+  const eduList = education.education as Array<Record<string, unknown>> | undefined;
+  if (eduList) {
+    context += `[EDUCATION]\n`;
+    for (const e of eduList) {
+      context += `${e.degree} — ${e.institution} (${(e.period as Record<string, string>)?.start}–${(e.period as Record<string, string>)?.end || "Present"})\n`;
     }
     context += "\n";
   }
 
-  if (q.includes("achievement") || q.includes("recogni")) {
-    const achList = achievements.achievements as Array<Record<string, unknown>> | undefined;
-    if (achList) {
-      context += `[ACHIEVEMENTS]\n`;
-      for (const a of achList) {
-        context += `- ${a.title}: ${a.description}\n`;
-      }
+  const achList = achievements.achievements as Array<Record<string, unknown>> | undefined;
+  if (achList) {
+    context += `[ACHIEVEMENTS]\n`;
+    for (const a of achList) {
+      context += `- ${a.title}: ${a.description}\n`;
     }
     context += "\n";
   }
 
-  if (q.includes("hire") || q.includes("why") || q.includes("strength") || q.includes("role") || q.includes("fit")) {
-    const cats = (skills as Record<string, unknown>)?.categories as Array<Record<string, unknown>>;
-    const projList = (projects as Record<string, unknown>)?.projects as Array<Record<string, unknown>>;
-
-    context += `[HIRING SUMMARY]\n`;
-    context += `Total Projects: ${projList?.length || 0}\n`;
-    if (cats) {
-      let totalSkills = 0;
-      for (const cat of cats) {
-        totalSkills += (cat.skills as Array<unknown>).length;
-      }
-      context += `Total Skill Categories: ${cats.length}\n`;
-      context += `Total Skills: ${totalSkills}\n`;
+  context += `[HIRING SUMMARY]\n`;
+  context += `Total Projects: ${projList?.length || 0}\n`;
+  if (cats) {
+    let totalSkills = 0;
+    for (const cat of cats) {
+      totalSkills += (cat.skills as Array<unknown>).length;
     }
-    context += `Education: Diploma in Information Technology at GCET\n`;
-    context += `Experience Level: 3+ years of learning and building\n\n`;
+    context += `Total Skill Categories: ${cats.length}\n`;
+    context += `Total Skills: ${totalSkills}\n`;
   }
-
-  if (!context) {
-    context += `[PERSONAL INFO]\nName: ${(resume.personalInfo as Record<string, string>)?.name || "Yug Sathavara"}\n`;
-    context += `Title: ${(resume.personalInfo as Record<string, string>)?.title || ""}\n`;
-    context += `Summary: ${(resume.personalInfo as Record<string, string>)?.summary || ""}\n\n`;
-    context += `[SKILLS OVERVIEW]\n`;
-    const cats = (skills as Record<string, unknown>)?.categories as Array<Record<string, unknown>>;
-    if (cats) {
-      for (const cat of cats) {
-        context += `${cat.name}: ${(cat.skills as Array<Record<string, unknown>>).map((s) => s.name).join(", ")}\n`;
-      }
-    }
-    context += `\n[PROJECTS]\n`;
-    const projList = (projects as Record<string, unknown>)?.projects as Array<Record<string, unknown>>;
-    if (projList) {
-      for (const p of projList) {
-        context += `${p.name} — ${(p as Record<string, unknown>).tagline}\n`;
-      }
-    }
-  }
+  context += `Education: Diploma in Information Technology at GCET\n`;
+  context += `Experience Level: 3+ years of learning and building\n\n`;
 
   return context;
 }

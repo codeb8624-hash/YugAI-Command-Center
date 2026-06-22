@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useChat } from "../../context/ChatContext";
 import { chatSuggestions } from "../../data/projects";
 import { sendChatMessage } from "../../utils/api";
+import { XCircle } from "lucide-react";
 
 type Message = {
   role: "user" | "ai";
@@ -14,6 +15,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [suggestions, setSuggestions] = useState<string[]>(chatSuggestions);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -63,10 +65,8 @@ export default function ChatWidget() {
       if (newSuggestions.length > 0) {
         setSuggestions(newSuggestions.slice(0, 4));
       }
-    } catch {
-      const fallback = getFallbackResponse(content);
-      const aiMsg: Message = { role: "ai", content: fallback.reply };
-      setMessages((prev) => [...prev, aiMsg]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "I'm sorry, I'm having trouble connecting. Please try again later.");
     } finally {
       setIsTyping(false);
     }
@@ -308,44 +308,24 @@ function InlineContent({ text }: { text: string }) {
   );
 }
 
-function getFallbackResponse(message: string): { reply: string; suggestions: string[] } {
-  const q = message.toLowerCase();
-  let reply: string;
-
-  if (q.includes("hire") || q.includes("why"))
-    reply = `Great question. Here's why I'd be a strong hire:
-
-1. **Full-Stack Versatility** — I've built Android apps (ChitraAI), web ERPs (Hariom Machinery), and PHP platforms (School Management System).
-
-2. **AI-First Mindset** — I integrate AI into production apps, not just consume it.
-
-3. **Real-World Impact** — My ERP system is deployed and used daily by a manufacturing business.
-
-4. **Growth Trajectory** — From HTML to AI integration in 3 years. I learn fast and ship faster.`;
-  else if (q.includes("project") || q.includes("strongest") || q.includes("best"))
-    reply = `My strongest project is **ChitraAI** — an Android app that generates images using AI via OpenRouter API.\n\nKey highlights:\n- Native Android with Material Design\n- Multi-model AI support\n- 100% crash-free in testing\n\nI also built **Hariom Machinery ERP** which is deployed in production.`;
-  else if (q.includes("skill") || q.includes("technolog") || q.includes("know"))
-    reply = `**Frontend:** React, TypeScript, HTML, CSS, JavaScript, Tailwind CSS\n**Backend:** Node.js, Express, PHP\n**Database:** MySQL\n**Mobile:** Java, Android Studio\n**AI:** OpenRouter API, Prompt Engineering\n**Tools:** Git, Postman, VS Code\n\nI have **12+ skills** across these categories.`;
-  else if (q.includes("resume"))
-    reply = `You can view my resume on the Resume page. Quick summary:\n- Education: Diploma IT at GCET\n- 3 major projects including a production ERP\n- 12+ technologies across the full stack`;
-  else if (q.includes("contact"))
-    reply = `Email: yug.sathavara@example.com\nLinkedIn: linkedin.com/in/yugsathavara\nGitHub: github.com/yugsathavara`;
-  else if (q.includes("hariom") || q.includes("erp"))
-    reply = `**Hariom Machinery ERP** — Full-stack inventory & billing system.\n\nTech: React + Node.js + MySQL\nImpact: Reduced invoice time from 15min to 2min. Deployed in production.`;
-  else if (q.includes("chitraai") || q.includes("architecture"))
-    reply = `**ChitraAI Architecture:**\nAndroid UI → Java Service → OpenRouter API Gateway → GPT-4o / Stable Diffusion\n\nKey: Service layer abstraction enables swapping models without UI changes.`;
-  else if (q.includes("interview") || q.includes("full stack") || q.includes("role"))
-    reply = `I build across the full stack: React/TypeScript frontends, Node.js/Express APIs, MySQL databases, Android apps with Java, and AI integrations via OpenRouter.\n\nMy edge: I understand how every layer connects — from XML layouts to prompt engineering.`;
-  else
-    reply = `I'm YugAI, the AI career twin of Yug Sathavara. I can tell you about his skills, projects, education, and experience. What would you like to know?`;
-
-  return {
-    reply,
-    suggestions: [
-      "Why should I hire Yug?",
-      "Explain ChitraAI architecture",
-      "What technologies do you know?",
-      "Show your strongest project",
-    ],
-  };
+function ErrorBanner({ message, onDismiss }: { message: string; onDismiss: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="flex items-start gap-2 p-3 mx-4 mt-2 bg-red-500/10 border border-red-500/30 rounded-xl"
+    >
+      <XCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+      <p className="text-xs text-red-300 flex-1">{message}</p>
+      <button
+        onClick={onDismiss}
+        className="text-red-400 hover:text-red-300 cursor-pointer"
+        aria-label="Dismiss error"
+      >
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </motion.div>
+  );
 }

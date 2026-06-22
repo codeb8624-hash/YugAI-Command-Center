@@ -18,7 +18,6 @@ export const config = {
     apiKey: process.env.OPENROUTER_API_KEY || "",
     baseUrl: "https://openrouter.ai/api/v1",
     defaultModel: "openai/gpt-4o-mini",
-    fallbackModel: "anthropic/claude-3-haiku-20240307",
     maxTokens: 512,
     temperature: 0.6,
   },
