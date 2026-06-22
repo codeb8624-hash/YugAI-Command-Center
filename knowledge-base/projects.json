@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Yug Sathavara — Projects",
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-19",
+  "projects": [
+    {
+      "id": "chitra-ai",
+      "name": "ChitraAI",
+      "tagline": "AI Image Generator for Android",
+      "description": "ChitraAI is an Android application that leverages the power of AI to generate stunning images from text prompts. Integrated with OpenRouter API, the app supports multiple AI models including Stable Diffusion, DALL-E, and more. Users can enter descriptive prompts and receive high-quality generated images directly on their mobile device. Features include prompt history, image gallery, and share functionality.",
+      "techStack": ["Java", "Android Studio", "OpenRouter API", "XML"],
+      "category": "Mobile App",
+      "year": 2026,
+      "status": "Completed",
+      "highlights": [
+        "Multi-model AI image generation via OpenRouter",
+        "Clean Material Design UI",
+        "Prompt history and local gallery storage",
+        "Image sharing and download features"
+      ],
+      "links": {
+        "github": "https://github.com/yugsathavara/chitra-ai",
+        "demo": null
+      },
+      "images": ["chitra-ai-1.png", "chitra-ai-2.png"]
+    },
+    {
+      "id": "hariom-erp",
+      "name": "Hariom Machinery ERP",
+      "tagline": "Inventory & Billing Management System",
+      "description": "A comprehensive ERP solution designed for Hariom Machinery to manage inventory, billing, customers, and suppliers. Built with React on the frontend and Node.js + MySQL on the backend. The system provides real-time stock tracking, automated invoice generation, customer management, and detailed reporting dashboards. Role-based access ensures that only authorized personnel can perform sensitive operations.",
+      "techStack": ["React", "Node.js", "MySQL", "Express", "REST API"],
+      "category": "Full-Stack Web App",
+      "year": 2025,
+      "status": "Deployed",
+      "highlights": [
+        "Real-time inventory tracking with low-stock alerts",
+        "Automated GST-compliant invoice generation",
+        "Customer and supplier management modules",
+        "Sales and purchase reporting dashboards"
+      ],
+      "links": {
+        "github": "https://github.com/yugsathavara/hariom-erp",
+        "demo": null
+      },
+      "images": ["hariom-erp-1.png", "hariom-erp-2.png"]
+    },
+    {
+      "id": "school-mgmt",
+      "name": "School Management System",
+      "tagline": "Multi-Role School Administration Platform",
+      "description": "A PHP-based school management system with a multi-role architecture supporting administrators, teachers, students, and parents. Each role has a tailored dashboard with relevant functionality: attendance tracking, grade management, timetable scheduling, and parent-teacher communication. The system uses MySQL for data persistence and follows the MVC pattern for clean separation of concerns.",
+      "techStack": ["PHP", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap"],
+      "category": "Web Application",
+      "year": 2025,
+      "status": "Completed",
+      "highlights": [
+        "Four role-based dashboards (Admin, Teacher, Student, Parent)",
+        "Attendance and grade management system",
+        "Timetable scheduling and event calendar",
+        "Secure session-based authentication"
+      ],
+      "links": {
+        "github": "https://github.com/yugsathavara/school-mgmt",
+        "demo": null
+      },
+      "images": ["school-mgmt-1.png", "school-mgmt-2.png"]
+    }
+  ]
+}

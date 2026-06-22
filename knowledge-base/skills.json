@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Yug Sathavara — Skills",
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-19",
+  "categories": [
+    {
+      "name": "Frontend Development",
+      "icon": "code",
+      "skills": [
+        { "name": "HTML", "level": 95, "experience": "3 years", "keywords": ["semantic HTML", "accessibility", "forms"] },
+        { "name": "CSS", "level": 90, "experience": "3 years", "keywords": ["flexbox", "grid", "animations", "responsive"] },
+        { "name": "JavaScript", "level": 85, "experience": "3 years", "keywords": ["ES6+", "async/await", "DOM manipulation"] },
+        { "name": "React", "level": 75, "experience": "1.5 years", "keywords": ["hooks", "state management", "SPA"] },
+        { "name": "Tailwind CSS", "level": 80, "experience": "1 year", "keywords": ["utility-first", "responsive", "dark mode"] }
+      ]
+    },
+    {
+      "name": "Backend Development",
+      "icon": "server",
+      "skills": [
+        { "name": "Node.js", "level": 70, "experience": "1.5 years", "keywords": ["Express", "REST APIs", "middleware"] },
+        { "name": "PHP", "level": 75, "experience": "2 years", "keywords": ["MVC", "sessions", "PDO"] }
+      ]
+    },
+    {
+      "name": "Databases",
+      "icon": "database",
+      "skills": [
+        { "name": "MySQL", "level": 80, "experience": "2 years", "keywords": ["queries", "joins", "normalization", "indexing"] }
+      ]
+    },
+    {
+      "name": "Mobile Development",
+      "icon": "smartphone",
+      "skills": [
+        { "name": "Java", "level": 70, "experience": "2 years", "keywords": ["OOP", "collections", "multithreading"] },
+        { "name": "Android Studio", "level": 65, "experience": "1 year", "keywords": ["XML layouts", "intents", "API integration"] }
+      ]
+    },
+    {
+      "name": "AI & Emerging Tech",
+      "icon": "brain",
+      "skills": [
+        { "name": "AI Integration", "level": 78, "experience": "1 year", "keywords": ["OpenRouter", "API chaining", "prompt design"] },
+        { "name": "Prompt Engineering", "level": 82, "experience": "1 year", "keywords": ["system prompts", "few-shot", "context injection"] }
+      ]
+    }
+  ],
+  "skillTags": [
+    { "tag": "Frontend", "items": ["React", "HTML", "CSS", "JavaScript", "Tailwind CSS"] },
+    { "tag": "Backend", "items": ["Node.js", "PHP", "Express"] },
+    { "tag": "Database", "items": ["MySQL"] },
+    { "tag": "Mobile", "items": ["Java", "Android Studio"] },
+    { "tag": "AI", "items": ["AI Integration", "Prompt Engineering", "OpenRouter"] }
+  ]
+}

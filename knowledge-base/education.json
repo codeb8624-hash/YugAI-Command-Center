@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Yug Sathavara — Education",
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-19",
+  "education": [
+    {
+      "id": "diploma-it-gcet",
+      "degree": "Diploma in Information Technology",
+      "institution": "G H Patel College of Engineering & Technology (GCET)",
+      "shortName": "GCET",
+      "location": "Vallabh Vidyanagar, Anand, Gujarat",
+      "period": {
+        "start": "2023",
+        "end": "2026",
+        "current": true
+      },
+      "status": "Pursuing",
+      "description": "A three-year diploma program focused on information technology fundamentals, software development, database management, and emerging technologies. The curriculum covers programming languages, web development, mobile app development, and system analysis.",
+      "curriculum": [
+        "Programming Fundamentals (Java, C)",
+        "Web Development (HTML, CSS, JS, PHP)",
+        "Database Management Systems (MySQL)",
+        "Data Structures & Algorithms",
+        "Software Engineering",
+        "Computer Networks",
+        "Mobile Application Development",
+        "Artificial Intelligence & Machine Learning"
+      ],
+      "achievements": [
+        "Developed 3 major projects during the program",
+        "Active participation in tech events and hackathons",
+        "Strong academic performance in AI and web development modules"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "year": "2023",
+      "event": "Started Diploma in IT at GCET",
+      "type": "education"
+    },
+    {
+      "year": "2025",
+      "event": "Completed School Management System",
+      "type": "project"
+    },
+    {
+      "year": "2025-2026",
+      "event": "Developed Hariom Machinery ERP",
+      "type": "project"
+    },
+    {
+      "year": "2026",
+      "event": "Built ChitraAI — AI Image Generator",
+      "type": "project"
+    },
+    {
+      "year": "2026",
+      "event": "Launched YugAI — AI Career Twin Portfolio",
+      "type": "project"
+    }
+  ]
+}

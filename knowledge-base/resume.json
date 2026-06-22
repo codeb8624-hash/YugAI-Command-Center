@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Yug Sathavara — Resume",
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-19",
+  "personalInfo": {
+    "name": "Yug Sathavara",
+    "title": "Full-Stack Developer & AI Enthusiast",
+    "email": "yug.sathavara@example.com",
+    "phone": "+91 98765 43210",
+    "location": "Anand, Gujarat, India",
+    "linkedin": "https://linkedin.com/in/yugsathavara",
+    "github": "https://github.com/yugsathavara",
+    "portfolio": "https://yugai.vercel.app",
+    "summary": "Diploma in Information Technology student at GCET with hands-on experience in full-stack development, Android app development, and AI integration. Passionate about building intelligent applications that solve real-world problems. Creator of ChitraAI, an AI image generator Android app, and contributor to ERP and school management systems."
+  },
+  "experience": [
+    {
+      "type": "project",
+      "title": "ChitraAI — AI Image Generator",
+      "organization": "Personal Project",
+      "period": "2026",
+      "highlights": [
+        "Built an Android app for AI-powered image generation",
+        "Integrated OpenRouter API for multi-model AI access",
+        "Designed intuitive UI for prompt-based image creation"
+      ]
+    },
+    {
+      "type": "project",
+      "title": "Hariom Machinery ERP",
+      "organization": "Hariom Machinery",
+      "period": "2025–2026",
+      "highlights": [
+        "Developed full-stack ERP for inventory and billing management",
+        "Built React frontend with Node.js + MySQL backend",
+        "Implemented real-time stock tracking and invoice generation"
+      ]
+    },
+    {
+      "type": "project",
+      "title": "School Management System",
+      "organization": "Academic Project",
+      "period": "2025",
+      "highlights": [
+        "Created multi-role PHP + MySQL system for schools",
+        "Role-based dashboards for admin, teachers, students, parents",
+        "Managed attendance, grades, and timetable modules"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Diploma in Information Technology",
+      "institution": "G H Patel College of Engineering & Technology (GCET)",
+      "location": "Vallabh Vidyanagar, Gujarat",
+      "period": "2023–2026",
+      "status": "Pursuing"
+    }
+  ],
+  "skills": [
+    "HTML", "CSS", "JavaScript", "React", "Node.js",
+    "PHP", "MySQL", "Java", "Android Studio",
+    "AI Integration", "Prompt Engineering",
+    "REST APIs", "Git", "TypeScript", "Tailwind CSS"
+  ],
+  "certifications": [],
+  "languages": ["English", "Hindi", "Gujarati"],
+  "interests": ["Artificial Intelligence", "Open Source", "UI/UX Design", "Mobile Development"]
+}

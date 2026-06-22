@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Yug Sathavara — Achievements & Recognition",
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-19",
+  "achievements": [
+    {
+      "id": "openrouter-integration",
+      "title": "First OpenRouter Android Integration",
+      "type": "technical",
+      "description": "Successfully integrated OpenRouter's multi-model AI API into a native Android application (ChitraAI), enabling access to GPT-4, Claude, and Stable Diffusion through a single interface.",
+      "date": "2026-03",
+      "impact": "Demonstrated advanced API integration skills combining mobile development with cutting-edge AI technology."
+    },
+    {
+      "id": "erp-deployment",
+      "title": "Production ERP Deployment",
+      "type": "professional",
+      "description": "Developed and deployed a full-stack ERP system for Hariom Machinery, handling real inventory, billing, and customer data in a production environment.",
+      "date": "2026-01",
+      "impact": "Gained real-world experience in requirement gathering, development, testing, and deployment of business-critical software."
+    },
+    {
+      "id": "multi-role-system",
+      "title": "Complex Multi-Role Architecture",
+      "type": "technical",
+      "description": "Designed and implemented a multi-role authentication and authorization system for a school management platform supporting four distinct user types with granular permissions.",
+      "date": "2025-08",
+      "impact": "Mastered role-based access control (RBAC) patterns and secure session management in PHP."
+    },
+    {
+      "id": "hackathon-participation",
+      "title": "Tech Hackathon Participant",
+      "type": "recognition",
+      "description": "Participated in inter-college hackathons, building functional prototypes within time constraints and presenting technical solutions to judges.",
+      "date": "2025-2026",
+      "impact": "Developed rapid prototyping skills and experience presenting under pressure."
+    },
+    {
+      "id": "ai-prompt-expertise",
+      "title": "Prompt Engineering Specialization",
+      "type": "skill",
+      "description": "Developed deep expertise in prompt engineering, including system prompt design, few-shot learning, context injection, and response formatting for production AI applications.",
+      "date": "2026",
+      "impact": "Enables building of sophisticated AI-powered features including the YugAI career twin itself."
+    }
+  ],
+  "milestones": [
+    {
+      "label": "3+ Projects Built",
+      "value": "3",
+      "icon": "code"
+    },
+    {
+      "label": "Technologies Used",
+      "value": "12+",
+      "icon": "layers"
+    },
+    {
+      "label": "Production Deployments",
+      "value": "1",
+      "icon": "globe"
+    },
+    {
+      "label": "AI Integrations",
+      "value": "2",
+      "icon": "brain"
+    }
+  ]
+}
