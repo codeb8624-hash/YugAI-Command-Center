@@ -1,3 +1,4 @@
+import type mysql from "mysql2/promise";
 import type { Request, Response } from "express";
 import { query } from "../db/index.js";
 
@@ -65,18 +66,18 @@ export async function handleContact(req: Request, res: Response): Promise<void> 
   const userAgent = req.headers["user-agent"] || "";
 
   const result = await query(
-    `INSERT INTO Contacts (name, email, subject, message, ip_address, user_agent)
-     VALUES ($1, $2, $3, $4, $5, $6)
-     RETURNING id, created_at`,
+    `INSERT INTO Contacts (name, email, subject, message, ip_address, user_agent, created_at)
+     VALUES (?, ?, ?, ?, ?, ?, NOW())`,
     [name, email, subject, message, ipAddress, userAgent]
   );
 
   if (result) {
+    const header = result[0] as mysql.ResultSetHeader;
     res.status(201).json({
       success: true,
       data: {
-        id: result.rows[0].id,
-        createdAt: result.rows[0].created_at,
+        id: header.insertId,
+        createdAt: new Date().toISOString(),
       },
       error: null,
     });

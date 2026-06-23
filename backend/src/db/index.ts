@@ -1,37 +1,36 @@
-import type pg from "pg";
+import type mysql from "mysql2/promise";
 
-let Pool: typeof import("pg").Pool | null = null;
-let pool: pg.Pool | null = null;
+let pool: mysql.Pool | null = null;
 
-export function getPool(): pg.Pool | null {
-  if (pool) return pool;
-  return null;
+export function getPool(): mysql.Pool | null {
+  return pool;
 }
 
 export async function connectDatabase(): Promise<void> {
   const databaseUrl = process.env.DATABASE_URL;
 
-  if (!databaseUrl || databaseUrl === "postgresql://user:pass@localhost:5432/yugai") {
+  if (!databaseUrl || databaseUrl === "mysql://root@127.0.0.1:3306/yugai") {
     console.warn("[DB] DATABASE_URL not configured — running without database");
     return;
   }
 
-  const pgModule = await import("pg");
-  Pool = pgModule.Pool;
+  const mysqlModule = await import("mysql2/promise");
 
-  pool = new Pool({
-    connectionString: databaseUrl,
-    max: 10,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 5000,
+  pool = mysqlModule.createPool({
+    uri: databaseUrl,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+    connectTimeout: 5000,
   });
 
   try {
-    const client = await pool.connect();
-    console.log("[DB] Connected to PostgreSQL");
-    client.release();
+    const connection = await pool.getConnection();
+    await connection.ping();
+    console.log("[DB] Connected to MariaDB");
+    connection.release();
 
-    pool.on("error", (err) => {
+    pool.pool.on("error", (err: Error) => {
       console.error("[DB] Unexpected pool error:", err.message);
     });
   } catch (err) {
@@ -43,7 +42,7 @@ export async function connectDatabase(): Promise<void> {
 export async function query(
   text: string,
   params?: unknown[]
-): Promise<pg.QueryResult | null> {
+): Promise<[mysql.QueryResult, mysql.FieldPacket[]] | null> {
   const p = getPool();
   if (!p) return null;
   return p.query(text, params);
