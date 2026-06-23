@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { resumeData, recruiterSummary } from "../data/skills";
+import SEO from "../components/seo/SEO";
 
 function Section({ title, children, delay = 0 }: { title: string; children: React.ReactNode; delay?: number }) {
   return (
@@ -25,6 +26,12 @@ export default function ResumePage() {
 
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <SEO
+        title="Resume | Yug Sathavara"
+        description="Professional resume, education, achievements, skills, and projects."
+        ogUrl="https://yugai.vercel.app/resume"
+        canonical="https://yugai.vercel.app/resume"
+      />
       <div className="container-main">
         <motion.div
           initial={{ opacity: 0, y: 10 }}

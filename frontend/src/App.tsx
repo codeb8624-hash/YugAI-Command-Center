@@ -1,13 +1,17 @@
 import { useState, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { ChatProvider } from "./context/ChatContext";
 import ErrorBoundary from "./components/ErrorBoundary";
 import BootSequence from "./components/boot/BootSequence";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import ChatWidget from "./components/chat/ChatWidget";
+import SEO from "./components/seo/SEO";
+import JsonLd from "./components/seo/JsonLd";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
+const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const ResumePage = lazy(() => import("./pages/ResumePage"));
 const SkillsPage = lazy(() => import("./pages/SkillsPage"));
 const RecruiterPage = lazy(() => import("./pages/RecruiterPage"));
@@ -23,38 +27,52 @@ function PageLoader() {
 }
 
 export default function App() {
-  const [bootComplete, setBootComplete] = useState(false);
+  const [bootComplete, setBootComplete] = useState(
+    () => localStorage.getItem("bootCompleted") === "true"
+  );
 
   if (!bootComplete) {
-    return <BootSequence onComplete={() => setBootComplete(true)} />;
+    return (
+      <BootSequence
+        onComplete={() => {
+          localStorage.setItem("bootCompleted", "true");
+          setBootComplete(true);
+        }}
+      />
+    );
   }
 
   return (
-    <ChatProvider>
-      <ErrorBoundary>
-        <div className="min-h-screen bg-deep-void flex flex-col">
-          <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg focus:text-sm focus:font-medium">
-            Skip to main content
-          </a>
-          <main id="main-content" className="flex-1">
-          <Navbar />
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/resume" element={<ResumePage />} />
-              <Route path="/skills" element={<SkillsPage />} />
-              <Route path="/recruiter" element={<RecruiterPage />} />
-              <Route path="/projects/:slug" element={<ProjectCaseStudyPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-          </main>
-          <Footer />
-          <ChatWidget />
-        </div>
-      </ErrorBoundary>
-    </ChatProvider>
+    <HelmetProvider>
+      <ChatProvider>
+        <ErrorBoundary>
+          <SEO />
+          <JsonLd />
+          <div className="min-h-screen bg-deep-void flex flex-col">
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg focus:text-sm focus:font-medium">
+              Skip to main content
+            </a>
+            <main id="main-content" className="flex-1">
+            <Navbar />
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/resume" element={<ResumePage />} />
+                <Route path="/skills" element={<SkillsPage />} />
+                <Route path="/recruiter" element={<RecruiterPage />} />
+                <Route path="/projects/:slug" element={<ProjectCaseStudyPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+            </main>
+            <Footer />
+            <ChatWidget />
+          </div>
+        </ErrorBoundary>
+      </ChatProvider>
+    </HelmetProvider>
   );
 }
 

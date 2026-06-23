@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getProjectBySlug } from "../data/projects";
 import CaseStudyLayout from "../components/case-study/CaseStudyLayout";
+import SEO from "../components/seo/SEO";
 
 export default function ProjectCaseStudyPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -10,6 +11,12 @@ export default function ProjectCaseStudyPage() {
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center pt-16">
+        <SEO
+          title="Project Not Found | YugAI"
+          description="The requested project case study could not be found."
+          ogUrl={`https://yugai.vercel.app/projects/${slug}`}
+          canonical={`https://yugai.vercel.app/projects/${slug}`}
+        />
         <div className="text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -33,5 +40,15 @@ export default function ProjectCaseStudyPage() {
     );
   }
 
-  return <CaseStudyLayout project={project} />;
+  return (
+    <>
+      <SEO
+        title={`${project.name} Case Study | YugAI`}
+        description={project.tagline}
+        ogUrl={`https://yugai.vercel.app/projects/${slug}`}
+        canonical={`https://yugai.vercel.app/projects/${slug}`}
+      />
+      <CaseStudyLayout project={project} />
+    </>
+  );
 }

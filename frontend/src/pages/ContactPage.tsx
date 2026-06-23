@@ -2,6 +2,7 @@ import { useState, type FormEvent, type ChangeEvent } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { submitContactForm, type ContactPayload } from "../utils/api";
+import SEO from "../components/seo/SEO";
 
 const initialForm: ContactPayload = { name: "", email: "", subject: "", message: "" };
 
@@ -109,7 +110,13 @@ export default function ContactPage() {
   if (status === "success") {
     return (
       <div className="min-h-screen pt-24 pb-16">
-        <div className="container-main">
+        <SEO
+          title="Contact | YugAI"
+          description="Get in touch with Yug Sathavara for internships, freelance projects, and opportunities."
+        ogUrl="https://yugai.vercel.app/contact"
+        canonical="https://yugai.vercel.app/contact"
+      />
+      <div className="container-main">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -136,6 +143,12 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <SEO
+        title="Contact | YugAI"
+        description="Get in touch with Yug Sathavara for internships, freelance projects, and opportunities."
+        ogUrl="https://yugai.vercel.app/contact"
+        canonical="https://yugai.vercel.app/contact"
+      />
       <div className="container-main">
         <motion.div
           initial={{ opacity: 0, y: 10 }}

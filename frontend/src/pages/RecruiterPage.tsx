@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { resumeData, recruiterSummary, skillCategories } from "../data/skills";
 import { useAnimatedCounter } from "../hooks/useAnimatedCounter";
+import SEO from "../components/seo/SEO";
 
 function StatCard({ value, suffix = "", label, delay }: { value: number; suffix?: string; label: string; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -109,6 +110,12 @@ export default function RecruiterPage() {
 
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <SEO
+        title="Recruiter Dashboard | YugAI"
+        description="Quick evaluation dashboard for recruiters with skills, projects, resume, and AI interview assistant."
+        ogUrl="https://yugai.vercel.app/recruiter"
+        canonical="https://yugai.vercel.app/recruiter"
+      />
       <div className="container-main">
         <motion.div
           initial={{ opacity: 0, y: 10 }}

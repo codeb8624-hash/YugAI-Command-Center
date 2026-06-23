@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { skillCategories, type SkillCategory } from "../data/skills";
 import { useAnimatedCounter } from "../hooks/useAnimatedCounter";
+import SEO from "../components/seo/SEO";
 
 function SkillBar({ name, level, experience, delay }: { name: string; level: number; experience: string; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -73,6 +74,12 @@ function CategoryCard({ category, index }: { category: SkillCategory; index: num
 export default function SkillsPage() {
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <SEO
+        title="Skills Matrix | YugAI"
+        description="Explore frontend, backend, mobile, database, and AI development skills."
+        ogUrl="https://yugai.vercel.app/skills"
+        canonical="https://yugai.vercel.app/skills"
+      />
       <div className="container-main">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
