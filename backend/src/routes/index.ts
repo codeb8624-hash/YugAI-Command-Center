@@ -10,6 +10,7 @@ import {
 } from "../controllers/chatController.js";
 import { handleChatStream } from "../controllers/chatStreamController.js";
 import { handleContact } from "../controllers/contactController.js";
+import { handleProjectById } from "../controllers/projectController.js";
 
 const router = Router();
 
@@ -18,6 +19,7 @@ router.post("/chat/stream", chatRateLimiter, handleChatStream);
 router.get("/resume", generalRateLimiter, handleResume);
 router.get("/skills", generalRateLimiter, handleSkills);
 router.get("/projects", generalRateLimiter, handleProjects);
+router.get("/projects/:id", generalRateLimiter, handleProjectById);
 router.get("/education", generalRateLimiter, handleEducation);
 router.get("/achievements", generalRateLimiter, handleAchievements);
 router.post("/contact", contactRateLimiter, handleContact);

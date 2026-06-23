@@ -157,3 +157,31 @@ export async function fetchProjectsData() {
   if (!data.success) throw new Error(data.error?.message);
   return data.data;
 }
+
+export interface ContactPayload {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+export async function submitContactForm(payload: ContactPayload): Promise<{ id: number | string; createdAt: string }> {
+  const res = await fetch(`${API_URL}/contact`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    const msg = data?.error?.message || `API returned ${res.status}`;
+    throw new Error(msg);
+  }
+
+  if (!data.success || !data.data) {
+    throw new Error(data?.error?.message || "Unknown API error");
+  }
+
+  return data.data;
+}
