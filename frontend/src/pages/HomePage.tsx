@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="YugAI Command Center | AI Career Twin & Full Stack Developer"
+        title="AI Career Twin & Full Stack Developer"
         description="AI-powered portfolio of Yug Sathavara featuring AI projects, recruiter dashboard, full stack development, and interactive AI career twin."
         ogUrl="https://yugai.vercel.app/"
         canonical="https://yugai.vercel.app/"

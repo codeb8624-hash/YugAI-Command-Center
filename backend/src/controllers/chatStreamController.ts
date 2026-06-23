@@ -20,6 +20,15 @@ export async function handleChatStream(req: Request, res: Response): Promise<voi
     return;
   }
 
+  if (message.length > 2000) {
+    res.status(400).json({
+      success: false,
+      data: null,
+      error: { code: "VALIDATION_ERROR", message: "Message exceeds 2000 characters." },
+    });
+    return;
+  }
+
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");

@@ -142,7 +142,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 2 }}
           className="mt-8 flex justify-center"
         >
-          <motion.div
+          <motion.button
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
             className="text-text-muted cursor-pointer"
@@ -151,6 +151,7 @@ export default function HeroSection() {
                 .getElementById("metrics")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
+            aria-label="Scroll to next section"
           >
             <svg aria-hidden="true"
               className="w-6 h-6"
@@ -165,7 +166,7 @@ export default function HeroSection() {
                 d="M19 14l-7 7m0 0l-7-7m7 7V3"
               />
             </svg>
-          </motion.div>
+          </motion.button>
         </motion.div>
       </div>
     </section>

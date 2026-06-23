@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "Home", href: "/", isRoute: false },
-  { label: "Projects", href: "/#projects", isRoute: false },
+  { label: "Home", href: "/", isRoute: true },
+  { label: "Projects", href: "/projects", isRoute: true },
   { label: "Skills", href: "/skills", isRoute: true },
   { label: "Resume", href: "/resume", isRoute: true },
-  { label: "Contact", href: "/#contact", isRoute: false },
+  { label: "Contact", href: "/contact", isRoute: true },
 ];
 
 export default function Navbar() {
@@ -27,25 +27,15 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) =>
-            link.isRoute ? (
-              <Link
-                key={link.label}
-                to={link.href}
-                className="px-3 py-2 text-sm text-text-secondary hover:text-text-primary rounded-md hover:bg-surface-elevated transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.label}
-                href={link.href}
-                className="px-3 py-2 text-sm text-text-secondary hover:text-text-primary rounded-md hover:bg-surface-elevated transition-colors duration-200"
-              >
-                {link.label}
-              </a>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              to={link.href}
+              className="px-3 py-2 text-sm text-text-secondary hover:text-text-primary rounded-md hover:bg-surface-elevated transition-colors duration-200"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         <div className="hidden md:flex items-center gap-3">
@@ -99,27 +89,16 @@ export default function Navbar() {
             className="md:hidden bg-surface border-b border-border"
           >
             <div className="container-main py-4 space-y-2">
-              {navLinks.map((link) =>
-                link.isRoute ? (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="block px-3 py-2 text-sm text-text-secondary hover:text-text-primary rounded-md hover:bg-surface-elevated transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="block px-3 py-2 text-sm text-text-secondary hover:text-text-primary rounded-md hover:bg-surface-elevated transition-colors duration-200"
-                  >
-                    {link.label}
-                  </a>
-                )
-              )}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-3 py-2 text-sm text-text-secondary hover:text-text-primary rounded-md hover:bg-surface-elevated transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              ))}
               <Link
                 to="/recruiter"
                 onClick={() => setMobileOpen(false)}

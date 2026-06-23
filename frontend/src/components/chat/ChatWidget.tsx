@@ -46,6 +46,7 @@ export default function ChatWidget() {
 
   const sendMessage = useCallback(async (content: string) => {
     if (!content.trim()) return;
+    setError(null);
 
     const userMsg: Message = { role: "user", content: content.trim() };
     setMessages((prev) => [...prev, userMsg]);
@@ -75,6 +76,8 @@ export default function ChatWidget() {
   function handleSuggestionClick(q: string) {
     sendMessage(q);
   }
+
+  const dismissError = useCallback(() => setError(null), []);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -160,6 +163,8 @@ export default function ChatWidget() {
             </button>
           </div>
         </div>
+
+        {error && <ErrorBanner message={error} onDismiss={dismissError} />}
 
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           <AnimatePresence>

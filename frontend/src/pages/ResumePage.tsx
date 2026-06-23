@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { resumeData, recruiterSummary } from "../data/skills";
@@ -23,6 +24,33 @@ function Section({ title, children, delay = 0 }: { title: string; children: Reac
 
 export default function ResumePage() {
   const { personalInfo, experience, education, skills, achievements } = resumeData;
+  const resumeRef = useRef<HTMLDivElement>(null);
+
+  async function downloadPDF() {
+    if (!resumeRef.current) return;
+    const html2canvas = (await import("html2canvas")).default;
+    const { jsPDF } = await import("jspdf");
+    const canvas = await html2canvas(resumeRef.current, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#0a0a0f",
+    });
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pdfW = pdf.internal.pageSize.getWidth();
+    const pdfH = (canvas.height * pdfW) / canvas.width;
+    let heightLeft = pdfH;
+    let position = 0;
+    pdf.addImage(imgData, "PNG", 0, position, pdfW, pdfH);
+    heightLeft -= pdf.internal.pageSize.getHeight();
+    while (heightLeft > 0) {
+      position = heightLeft - pdfH;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, pdfW, pdfH);
+      heightLeft -= pdf.internal.pageSize.getHeight();
+    }
+    pdf.save("yug_sathavara_resume.pdf");
+  }
 
   return (
     <div className="min-h-screen pt-24 pb-16">
@@ -49,6 +77,12 @@ export default function ResumePage() {
           </Link>
           <div className="flex gap-2">
             <button
+              onClick={downloadPDF}
+              className="px-4 py-2 text-xs font-medium text-white bg-primary rounded-lg hover:bg-primary-light transition-all duration-200 cursor-pointer"
+            >
+              Download PDF
+            </button>
+            <button
               onClick={() => {
                 const blob = new Blob([JSON.stringify(resumeData, null, 2)], { type: "application/json" });
                 const url = URL.createObjectURL(blob);
@@ -65,7 +99,7 @@ export default function ResumePage() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div ref={resumeRef} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -239,6 +273,15 @@ export default function ResumePage() {
               <h3 className="text-sm font-semibold text-text-primary mb-3">Download Resume</h3>
               <div className="space-y-2">
                 <button
+                  onClick={downloadPDF}
+                  className="w-full flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-white bg-primary rounded-lg hover:bg-primary-light transition-all duration-200 cursor-pointer"
+                >
+                  <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                  Download PDF
+                </button>
+                <button
                   onClick={() => {
                     const blob = new Blob([JSON.stringify(resumeData, null, 2)], { type: "application/json" });
                     const url = URL.createObjectURL(blob);
@@ -248,7 +291,7 @@ export default function ResumePage() {
                     a.click();
                     URL.revokeObjectURL(url);
                   }}
-                  className="w-full flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-white bg-primary rounded-lg hover:bg-primary-light transition-all duration-200 cursor-pointer"
+                  className="w-full flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-text-secondary border border-border rounded-lg hover:border-primary/40 hover:text-primary transition-all duration-200 cursor-pointer"
                 >
                   <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

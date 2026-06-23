@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode, KeyboardEvent } from "react";
 import { motion } from "framer-motion";
 
 interface GlowButtonProps {
@@ -36,12 +36,22 @@ export default function GlowButton({
       "text-text-secondary hover:text-text-primary hover:bg-surface-elevated",
   };
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if ((e.key === "Enter" || e.key === " ") && onClick) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   const content = (
     <motion.span
+      role={href ? undefined : "button"}
+      tabIndex={href ? undefined : 0}
       className={`${base} ${sizes[size]} ${variants[variant]} ${className}`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
+      onKeyDown={href ? undefined : handleKeyDown}
     >
       {children}
     </motion.span>
